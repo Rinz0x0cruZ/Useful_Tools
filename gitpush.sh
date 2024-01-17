@@ -4,22 +4,25 @@ read -p "[+] Path: " path
 read -p "[+] Files if any: " files
 read -p "[+] Comment: " comment
 
-cd "$path" || { echo "Error changing directory"; exit 1; }
+(
+    cd "$path" || { echo "Error changing directory"; exit 1; }
 
-git add "$files"
+    git add "$files"
 
-read -p "[+] Need a status check? " chk
+    read -p "[+] Need a status check? " chk
 
-case "$chk" in
-    [Yy]* ) git status ;;
-    [Nn]* ) echo "continuing....." ;;
-    * ) echo "[+] Please answer in yes or no" ;;
-esac
+    case "$chk" in
+        [Yy]* ) git status ;;
+        [Nn]* ) echo "continuing....." ;;
+        * ) echo "[+] Please answer in yes or no" ;;
+    esac
 
-git commit -m "$comment"
-git push
+    git commit -m "$comment"
+    git push
 
-case "$?" in
-    0) echo "[+] Successfully Pushed" ;;
-    *) echo "[+] Error Occurred" ;;
-esac
+    case "$?" in
+        0) echo "[+] Successfully Pushed" ;;
+        *) echo "[+] Error Occurred" ;;
+    esac
+)
+
